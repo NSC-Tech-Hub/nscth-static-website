@@ -1,24 +1,8 @@
----
-name: Feature Request
-about: Suggest an idea for the Bridge to Tech project
-title: '[FEAT]: '
-labels: 'status: vetting'
-assignees: ''
+# Quick Start Guide for New Members
 
----
+Welcome to the NSC Tech Hub. Follow these steps to get synced:
 
-## 📝 Description
-Describe the feature you are proposing. What problem does it solve for the user?
-
-## ✅ Vetting Checklist
-- [ ] I have verified this asset/logic follows the **DESIGN_SPECS.md**.
-- [ ] This asset has passed the **VETTING_LOOP.md** (if applicable).
-- [ ] I have discussed this with my Department Liaison.
-
-## 🎨 Assets Needed
-List any images, logos, or copy required for this feature. 
-*(Note: Assets must be in WebP or SVG format per agency rules).*
-
-## 🛠 Acceptance Criteria
-- [ ] Feature works on mobile and desktop.
-- [ ] [Add specific technical requirement here]
+1. **Read the Roots:** Review `GOVERNANCE.md` and `VETTING_LOOP.md` [in this repo](https://github.com/NSC-Tech-Hub/documentation).
+2. **Join your Team:** Ensure you have been added to the correct GitHub Team (Liaisons or Production).
+3. **Claim an Issue:** Go to the `projects` repository and look for issues labeled `help wanted` or `ready for dev`.
+4. **Setup Environment:** Technical specifications will be updated here following the initial Project Kickoff. Please check back for required Node.js versions and VS Code extensions.

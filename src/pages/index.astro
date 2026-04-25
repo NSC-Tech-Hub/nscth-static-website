@@ -1,0 +1,84 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+	title="NSC Tech Hub"
+	description="The technical engine for Bridge to Tech at North Seattle College."
+>
+	<Header />
+
+	<main>
+		<section class="mx-auto flex min-h-[75vh] max-w-6xl flex-col justify-center px-6 py-20">
+			<p class="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300">
+				North Seattle College
+			</p>
+
+			<h1 class="mt-5 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">
+				The Technical Engine for Bridge to Tech
+			</h1>
+
+			<p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+				The NSC Tech Hub is an interdepartmental digital agency designed to bridge
+				Creative, Business, and Technical disciplines through student-led digital
+				solutions.
+			</p>
+		</section>
+
+		<section id="architecture" class="border-t border-white/10 bg-slate-900/60 px-6 py-16">
+			<div class="mx-auto max-w-6xl">
+				<p class="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300">
+					The Tree Model
+				</p>
+
+				<h2 class="mt-4 text-3xl font-bold">
+					Architecture
+				</h2>
+
+				<div class="mt-8 grid gap-6 md:grid-cols-3">
+					<article class="rounded-2xl border border-white/10 bg-white/5 p-6">
+						<h3 class="text-xl font-semibold">Roots</h3>
+						<p class="mt-3 text-slate-300">
+							Governance, source-of-truth documentation, and standardized guidebooks.
+						</p>
+					</article>
+
+					<article class="rounded-2xl border border-white/10 bg-white/5 p-6">
+						<h3 class="text-xl font-semibold">Trunk</h3>
+						<p class="mt-3 text-slate-300">
+							Technical program management that turns stakeholder needs into execution.
+						</p>
+					</article>
+
+					<article class="rounded-2xl border border-white/10 bg-white/5 p-6">
+						<h3 class="text-xl font-semibold">Canopy</h3>
+						<p class="mt-3 text-slate-300">
+							Cross-department collaboration between App Dev, Art, and Business.
+						</p>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section id="stage" class="px-6 py-16">
+			<div class="mx-auto max-w-6xl rounded-2xl border border-white/10 bg-white/5 p-8">
+				<p class="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300">
+					Active Stage
+				</p>
+
+				<h2 class="mt-4 text-3xl font-bold">
+					1.1 Live Integration
+				</h2>
+
+				<p class="mt-4 max-w-3xl text-slate-300">
+					We are transitioning from person-dependent workflows to system-dependent
+					workflows by codifying manual protocols into an automated source of truth.
+				</p>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</BaseLayout>

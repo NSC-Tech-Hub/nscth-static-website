@@ -1,13 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<BaseLayout>
+<BaseLayout title="Contact | NSC Tech Hub">
   <main class="max-w-2xl mx-auto p-6">
     <h1 class="text-2xl mb-4">Contact Us</h1>
 
     <article class="rounded-2xl border border-white/10 bg-white/5 p-6">
-      <form class="flex flex-col gap-4" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <form class="flex flex-col gap-4" method="POST">
         
         <label class="flex flex-col gap-1">
           Name

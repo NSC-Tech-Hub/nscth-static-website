@@ -1,3 +1,7 @@
+## Live Site
+
+🚀 View the deployed site: https://nscth-static-website.pages.dev
+
 # Base Structure Setup
 
 # NSC Tech Hub Static Website

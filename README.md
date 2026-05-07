@@ -92,3 +92,6 @@ npm run dev
 
 You can also test the production build with:
 npm run build
+
+Figma  Design
+https://www.figma.com/board/tmWMG2rQXaZEF3jhEaQVJb/site-map--website--next-wave-dev?node-id=0-1&t=tw2mSssbO2XYSFhO-1

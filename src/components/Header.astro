@@ -1,13 +1,36 @@
 <header class="border-b border-white/10 bg-slate-950">
-    <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="/" class="text-lg font-bold tracking-tight">
-            NSC Tech Hub
-        </a>
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+    <!-- Logo -->
+    <a href="/" class="text-lg font-bold tracking-tight">
+      NSC Tech Hub
+    </a>
 
-        <div class="flex items-center gap-6 text-sm text-slate-300">
-            <a href="/" class="transition hover:text-white">Home</a>
-            <a href="/#architecture" class="transition hover:text-white">Architecture</a>
-            <a href="/#stage" class="transition hover:text-white">Stage</a>
-        </div>
-    </nav>
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+      <a href="/" class="transition hover:text-white">Home</a>
+      <a href="/#architecture" class="transition hover:text-white">Architecture</a>
+      <a href="/#stage" class="transition hover:text-white">Stage</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="menu-btn" class="md:hidden text-slate-300 hover:text-white transition">
+      ☰
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden hidden flex-col gap-4 px-4 pb-4 text-sm text-slate-300">
+    <a href="/" class="transition hover:text-white">Home</a>
+    <a href="/#architecture" class="transition hover:text-white">Architecture</a>
+    <a href="/#stage" class="transition hover:text-white">Stage</a>
+  </div>
+
+  <script>
+    const btn = document.getElementById("menu-btn");
+    const menu = document.getElementById("mobile-menu");
+
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+  </script>
 </header>

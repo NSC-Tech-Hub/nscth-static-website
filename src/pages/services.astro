@@ -1,8 +1,15 @@
 ---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Services"
+  description="Explore NSC Tech Hub services, including product management, development, design collaboration, and internal support."
+  url="https://nscth-static-website.pages.dev/services"
+>
+  <Header />
   <main class="max-w-3xl mx-auto p-6">
     <h1 class="text-3xl font-bold mb-6">Our Services</h1>
 
@@ -26,4 +33,5 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <p>We support internal teams by providing tools, systems, and technical guidance to improve workflows.</p>
     </section>
   </main>
+  <Footer />
 </BaseLayout>

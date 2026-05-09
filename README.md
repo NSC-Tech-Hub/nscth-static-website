@@ -1,43 +1,98 @@
-# Astro Starter Kit: Minimal
+## Live Site
 
-```sh
-npm create astro@latest -- --template minimal
+🚀 View the deployed site: https://nscth-static-website.pages.dev
+
+# Base Structure Setup
+
+# NSC Tech Hub Static Website
+
+## 📌 Project Overview
+
+NSC Tech Hub is a student-led digital agency at North Seattle College that connects Creative, Business, and Technical disciplines.
+
+This website serves as the marketing site for the NSC Tech Hub. It will help explain the agency, showcase student-led work, and provide a clear public-facing presence for the program.
+
+## ⚙️ Tech Stack
+
+This project uses:
+
+- Astro
+- Tailwind CSS
+- Cloudflare Pages for deployment
+
+## 🚀 Getting Started
+
+Follow the steps below to run the project locally.
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js, LTS version recommended
+- npm or yarn
+
+You can check your versions with:
+
+```bash
+node -v
+npm -v
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Installation
 
-## 🚀 Project Structure
+Clone the repository:
+git clone https://github.com/NSC-Tech-Hub/nscth-static-website.git
 
-Inside of your Astro project, you'll see the following folders and files:
+Go into the project folder:
+cd nscth-static-website
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Install dependencies:
+npm install
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### Running Locally
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Start the local development server:
+npm run dev
 
-Any static assets, like images, can be placed in the `public/` directory.
+The app should run at:
+http://localhost:4321
 
-## 🧞 Commands
+### 🏗️ Project Structure
 
-All commands are run from the root of the project, from a terminal:
+Basic project structure:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+src/
+  components/
+  layouts/
+  pages/
+  styles/
 
-## 👀 Want to learn more?
+### Folder Purpose
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+components/  Reusable UI sections, like headers, footers, and cards
+layouts/     Shared page layouts
+pages/       Website routes and pages
+styles/      Global styles and Tailwind CSS setup
+
+### 🌐 Deployment
+
+This project is planned to be deployed using Cloudflare Pages.
+When deployment is configured, the site should auto-deploy when changes are pushed to the main branch.
+
+### 🤝 Contributing
+
+To contribute to this project:
+
+1. Create a new branch for your issue.
+2. Make your changes.
+3. Test the project locally.
+4. Submit a pull request.
+
+Example branch name:
+git checkout -b feature/issue-number-description
+
+Before opening a pull request, make sure the project runs locally:
+npm run dev
+
+You can also test the production build with:
+npm run build

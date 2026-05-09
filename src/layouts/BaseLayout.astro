@@ -4,7 +4,11 @@ import "../styles/global.css";
 const {
     title = "NSC Tech Hub",
     description = "The technical engine for Bridge to Tech at North Seattle College.",
+    image = "/og-image.png",
+    url = "https://nscth-static-website.pages.dev/",
 } = Astro.props;
+
+const siteTitle = title.includes("NSC Tech Hub") ? title : `NSC Tech Hub | ${title}`;
 ---
 
 <!doctype html>
@@ -13,11 +17,25 @@ const {
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+
+    <title>{siteTitle}</title>
+    <meta name="description" content={description} />
+
+
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
 </head>
 
 <body class="min-h-screen bg-slate-950 text-white antialiased">
-    <main class="mx-auto max-w-screen-lg px-4 py-6">
+    <main class="mx-auto max-w-5xl px-4 py-6">
         <slot />
     </main>
 </body>

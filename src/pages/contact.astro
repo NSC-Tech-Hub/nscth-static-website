@@ -1,42 +1,168 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 ---
 
-<BaseLayout
-  title="Contact | NSC Tech Hub"
-  description="Contact NSC Tech Hub for inquiries, support, or collaboration opportunities. We're here to help and connect with you."
-  url="https://nscth-static-website.pages.dev/contact"
->
-  <Header />
-  <main class="max-w-2xl mx-auto p-6">
-    <h1 class="text-2xl mb-4">Contact Us</h1>
+<BaseLayout title="Contact | NSC Tech Hub">
+  <main class="contact-page">
+    <section class="hero">
+      <h1>Interested in Working with the Tech Hub?</h1>
+      <p>
+        The North Seattle Tech Hub is always looking to connect with new people.
+        If you are interested, please fill out the form below.
+      </p>
+    </section>
 
-    <article class="rounded-2xl border border-white/10 bg-white/5 p-6">
-      <form class="flex flex-col gap-4" method="POST">
-        
-        <label class="flex flex-col gap-1">
-          Name
-          <input class="p-2 rounded bg-black/20 border border-white/10" type="text" name="name" required />
-        </label>
+    <section class="contact-layout">
+      <div class="image-box">
+        <div class="placeholder-image">Image Placeholder</div>
 
-        <label class="flex flex-col gap-1">
-          Email
-          <input class="p-2 rounded bg-black/20 border border-white/10" type="email" name="email" required />
-        </label>
+        <div class="info-text">
+          <h2>Collaborate With Us</h2>
+          <p>
+            NSC Tech Hub connects students, technology, and creative projects
+            together through collaboration and innovation.
+          </p>
+        </div>
+      </div>
 
-        <label class="flex flex-col gap-1">
-          Message
-          <textarea class="p-2 rounded bg-black/20 border border-white/10" name="message" rows="5" required></textarea>
-        </label>
+      <form class="contact-form">
+        <label for="name">Name</label>
+        <input id="name" type="text" placeholder="Enter your name" />
 
-        <button class="bg-white text-black rounded p-2 mt-2" type="submit">
-          Send
-        </button>
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="Enter your email" />
 
+        <label for="message">Message</label>
+        <textarea id="message" rows="6" placeholder="Type your message"></textarea>
+
+        <button type="submit">Send Message</button>
       </form>
-    </article>
+    </section>
   </main>
-  <Footer />
 </BaseLayout>
+
+<style>
+  .contact-page {
+    min-height: 100vh;
+    background: #050816;
+    color: white;
+    padding: 4rem 1rem;
+  }
+
+  .hero {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    font-weight: 800;
+  }
+
+  .hero p {
+    color: #cbd5e1;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 700px;
+    margin: auto;
+  }
+
+  .contact-layout {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .image-box,
+  .contact-form {
+    background: #0f172a;
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid #1e293b;
+  }
+
+  .placeholder-image {
+    height: 320px;
+    border: 2px dashed #475569;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+    background: #111827;
+  }
+
+  .info-text h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .info-text p {
+    color: #cbd5e1;
+    line-height: 1.7;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-form label {
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    background: #020617;
+    color: white;
+    font-size: 1rem;
+  }
+
+  .contact-form button {
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .contact-form button:hover {
+    background: #1d4ed8;
+  }
+
+  @media (max-width: 768px) {
+    .contact-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .hero {
+      text-align: left;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+    }
+
+    .image-box,
+    .contact-form {
+      padding: 1.5rem;
+    }
+
+    .placeholder-image {
+      height: 240px;
+    }
+  }
+</style>

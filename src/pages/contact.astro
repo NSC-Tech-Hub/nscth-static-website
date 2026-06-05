@@ -14,7 +14,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     <section class="contact-layout">
       <div class="image-box">
-        <div class="placeholder-image">Image Placeholder</div>
+    <div class="placeholder-image">
+  <img src="/Logo.png" alt="NSC Tech Hub Logo" />
+        </div>
         <div class="info-text">
           <h2>Collaborate With Us</h2>
           <p>
@@ -171,6 +173,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     color: #94a3b8;
     margin-bottom: 1.5rem;
     background: #111827;
+    .placeholder-image img {
+    width: 180px;
+    height: auto;
+}
   }
 
   .contact-form {

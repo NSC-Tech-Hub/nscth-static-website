@@ -26,7 +26,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
       </div>
 
-      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+      <!-- REQUIRED: hidden iframe to prevent Google redirect -->
+      <iframe
+        name="hidden_iframe"
+        id="hidden_iframe"
+        style="display:none;"
+      ></iframe>
 
       <form
         class="contact-form"
@@ -86,6 +91,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   ) {
     let isSubmitting = false;
 
+    // STEP 1: user submits
     form.addEventListener("submit", () => {
       isSubmitting = true;
       btn.disabled = true;
@@ -93,14 +99,23 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       status.style.color = "#94a3b8";
     });
 
+    // STEP 2: Google response loads in hidden iframe
     iframe.addEventListener("load", () => {
       if (!isSubmitting) return;
+
       isSubmitting = false;
+
       form.reset();
       btn.disabled = false;
-      status.textContent = "Thank you! Your message was submitted successfully.";
+
+      status.textContent =
+        "Thank you! Your message was submitted successfully.";
       status.style.color = "#22c55e";
-      setTimeout(() => { status.textContent = ""; }, 5000);
+
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        status.textContent = "";
+      }, 5000);
     });
   }
 </script>
@@ -166,16 +181,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     height: auto;
   }
 
-  .info-text h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .info-text p {
-    color: #cbd5e1;
-    line-height: 1.7;
-  }
-
   .contact-form {
     display: flex;
     flex-direction: column;
@@ -194,7 +199,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     border: 1px solid #334155;
     background: #020617;
     color: white;
-    font-size: 1rem;
   }
 
   .contact-form button {
@@ -205,10 +209,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     color: white;
     font-weight: 700;
     cursor: pointer;
-  }
-
-  .contact-form button:hover {
-    background: #1d4ed8;
   }
 
   .contact-form button:disabled {
@@ -224,23 +224,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   @media (max-width: 768px) {
     .contact-layout {
       grid-template-columns: 1fr;
-    }
-
-    .hero {
-      text-align: left;
-    }
-
-    .hero h1 {
-      font-size: 2.8rem;
-    }
-
-    .image-box,
-    .contact-form {
-      padding: 1.5rem;
-    }
-
-    .placeholder-image {
-      height: 240px;
     }
   }
 </style>

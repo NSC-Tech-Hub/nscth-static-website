@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TeamCard from "../components/TeamCard.astro";
+import teamData from "../data/teamData.json";
+---
+
+<BaseLayout title="Our Team | NSC Tech Hub">
+  <div class="mx-auto max-w-3xl px-6 py-20">
+
+    <header class="mb-16 text-center">
+      <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+        Our Team
+      </h1>
+    </header>
+
+    {teamData.map((group) => (
+      <section class="mb-12">
+
+        <!-- Full-width rule first, then label right-aligned below it -->
+        <div class="mb-6">
+          <div class="h-px w-full bg-white/20"></div>
+          <h2 class="text-right text-lg font-bold text-white mt-2">
+            {group.section}
+          </h2>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          {group.members.map((member) => (
+            <TeamCard
+              name={member.name}
+              role={member.role}
+              bio={member.bio}
+              image={member.image}
+            />
+          ))}
+        </div>
+
+      </section>
+    ))}
+
+  </div>
+</BaseLayout>

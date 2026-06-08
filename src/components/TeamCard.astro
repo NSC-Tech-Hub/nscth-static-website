@@ -1,0 +1,39 @@
+---
+interface Props {
+  name: string;
+  role: string;
+  bio: string;
+  image?: string | null;
+}
+
+const { name, role, bio, image } = Astro.props;
+---
+
+<article class="flex gap-4">
+
+  <!-- Picture box — standalone bordered box -->
+  <div class="shrink-0 w-36 h-36 border border-white/20 bg-white/5 flex items-center justify-center rounded-sm">
+    {image ? (
+      <img
+        src={image}
+        alt={`Photo of ${name}`}
+        class="w-full h-full object-cover rounded-sm"
+        loading="lazy"
+      />
+    ) : (
+      <svg viewBox="0 0 100 100" class="w-full h-full text-white/20" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="100" y1="0" x2="0" y2="100" stroke="currentColor" stroke-width="1.5"/>
+        <text x="50" y="58" text-anchor="middle" font-size="10" fill="currentColor">Picture</text>
+      </svg>
+    )}
+  </div>
+
+  <!-- Text box — standalone bordered box -->
+  <div class="flex-1 border border-white/20 bg-white/5 rounded-sm p-4">
+    <h3 class="text-base font-bold text-white">{name}</h3>
+    <p class="text-sm text-white/50 mb-2">{role}</p>
+    <p class="text-sm leading-relaxed text-white/60">{bio}</p>
+  </div>
+
+</article>

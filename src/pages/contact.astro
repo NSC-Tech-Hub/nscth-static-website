@@ -14,8 +14,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     <section class="contact-layout">
       <div class="image-box">
-    <div class="placeholder-image">
-  <img src="/Logo.png" alt="NSC Tech Hub Logo" />
+        <div class="placeholder-image">
+          <img src="/Logo.png" alt="NSC Tech Hub Logo" />
         </div>
         <div class="info-text">
           <h2>Collaborate With Us</h2>
@@ -26,25 +26,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
       </div>
 
-      <!-- REQUIRED: hidden iframe to prevent Google redirect -->
-      <iframe
-        name="hidden_iframe"
-        id="hidden_iframe"
-        style="display:none;"
-      ></iframe>
-
       <form
         class="contact-form"
         id="contact-form"
-        action="https://docs.google.com/forms/d/e/1FAIpQLSfcSb3lhr_pr956tXNwASU44a51Mpeu8-xGqd-cqlpq1oDdUg/formResponse"
-        method="POST"
-        target="hidden_iframe"
       >
         <label for="name">Name</label>
         <input
           id="name"
-          name="entry.1696145434"
+          name="name"
           type="text"
+          placeholder="Enter your name"
           required
           autocomplete="name"
         />
@@ -52,8 +43,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <label for="email">Email</label>
         <input
           id="email"
-          name="entry.601588194"
+          name="email"
           type="email"
+          placeholder="Enter your email"
           required
           autocomplete="email"
         />
@@ -61,8 +53,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <label for="message">Message</label>
         <textarea
           id="message"
-          name="entry.929942167"
+          name="message"
           rows="6"
+          placeholder="Type your message"
           required
         ></textarea>
 
@@ -77,45 +70,59 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <script>
   const form = document.getElementById("contact-form");
   const status = document.getElementById("status");
-  const iframe = document.getElementById("hidden_iframe");
-  const btn = document.getElementById("submit-btn");
+  const button = document.getElementById("submit-btn");
 
-  if (
-    form instanceof HTMLFormElement &&
-    status instanceof HTMLElement &&
-    iframe instanceof HTMLIFrameElement &&
-    btn instanceof HTMLButtonElement
-  ) {
-    let isSubmitting = false;
+  const clearStatus = () => {
+    setTimeout(() => {
+      status.textContent = "";
+      status.style.color = "";
+    }, 5000);
+  };
 
-    // STEP 1: user submits
-    form.addEventListener("submit", () => {
-      isSubmitting = true;
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      btn.disabled = true;
-      status.textContent = "Submitting...";
-      status.style.color = "#94a3b8";
-    });
+    if (button.disabled) return;
 
-    // STEP 2: Google response loads in hidden iframe
-    iframe.addEventListener("load", () => {
-      if (!isSubmitting) return;
+    button.disabled = true;
+    status.textContent = "Sending...";
 
-      isSubmitting = false;
+    const payload = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      message: document.getElementById("message").value,
+    };
 
-      form.reset();
-      btn.disabled = false;
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-      status.textContent =
-        "Thank you! Your message was submitted successfully.";
-      status.style.color = "#22c55e";
+      let data = {};
+      try {
+        data = await res.json();
+      } catch {}
 
-      // Clear success message after 5 seconds
-      setTimeout(() => {
-        status.textContent = "";
-      }, 5000);
-    });
-  }
+      if (res.ok) {
+        status.textContent = "Message sent successfully!";
+        status.style.color = "#22c55e";
+        form.reset();
+        clearStatus();
+      } else {
+        status.textContent = data.error || "Something went wrong";
+        status.style.color = "#ef4444";
+        clearStatus();
+      }
+    } catch (err) {
+      status.textContent = "Network error";
+      status.style.color = "#ef4444";
+      clearStatus();
+    } finally {
+      button.disabled = false;
+    }
+  });
 </script>
 
 <style>
@@ -170,13 +177,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #94a3b8;
     margin-bottom: 1.5rem;
     background: #111827;
-    .placeholder-image img {
+  }
+
+  .placeholder-image img {
     width: 180px;
     height: auto;
-}
   }
 
   .contact-form {

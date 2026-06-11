@@ -1,0 +1,32 @@
+---
+interface Props {
+  id?: string;
+  background?: 'white' | 'muted' | 'dark';
+  class?: string;
+}
+
+const { 
+  id, 
+  background = 'white', 
+  class: className, 
+  ...rest 
+} = Astro.props;
+
+// 1. Define vertical breathing room
+const baseStyles = "py-12 sm:py-16 md:py-24 relative overflow-hidden";
+
+// 2. Define background color themes
+const backgrounds = {
+  white: "bg-white text-slate-900",
+  muted: "bg-slate-50 text-slate-900",
+  dark: "bg-slate-900 text-white"
+};
+---
+
+<section 
+  id={id} 
+  class:list={[baseStyles, backgrounds[background], className]} 
+  {...rest}
+>
+  <slot />
+</section>

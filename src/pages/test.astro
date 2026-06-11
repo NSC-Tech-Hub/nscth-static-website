@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+import Card from '../components/Card.astro';
+import Button from '../components/Button.astro';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>NSC Tech Hub</title>
+  </head>
+  <body>
+    
+    <Section background="white">
+      <Container>
+        <h1 class="text-5xl font-extrabold text-slate-900">Welcome to NSC Tech Hub</h1>
+        <p class="mt-4 text-xl text-slate-600">Connecting Creative, Business, and Technical disciplines.</p>
+      </Container>
+    </Section>
+
+    <Section background="muted">
+      <Container>
+        <div class="mb-10">
+          <h2 class="text-3xl font-bold text-slate-900">Our Disciplines</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <Card 
+            title="Creative Design" 
+            description="Crafting wireframes and accessible design systems."
+          />
+
+          <Card 
+            title="Business Analysis" 
+            description="Managing client relations and scoping software requirements."
+          />
+
+          <Card 
+            title="Technical Dev" 
+            description="Writing semantic markup and styling modern applications with Tailwind CSS."
+          >
+            <div slot="footer">
+              <Button href="/contact" size="sm">Contact Us</Button>
+            </div>
+          </Card>
+
+        </div>
+      </Container>
+    </Section>
+
+  </body>
+</html>

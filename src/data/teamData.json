@@ -1,0 +1,41 @@
+[
+  {
+    "section": "TPM",
+    "members": [
+      {
+        "name": "Team Member Name",
+        "role": "Position",
+        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+        "image": null
+      }
+    ]
+  },
+  {
+    "section": "Product Management",
+    "members": [
+      {
+        "name": "Team Member Name",
+        "role": "Position",
+        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+        "image": null
+      },
+      {
+        "name": "Team Member Name",
+        "role": "Position",
+        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+        "image": null
+      }
+    ]
+  },
+  {
+    "section": "Developers",
+    "members": [
+      {
+        "name": "Team Member Name",
+        "role": "Position",
+        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+        "image": null
+      }
+    ]
+  }
+]

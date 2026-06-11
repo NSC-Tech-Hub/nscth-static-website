@@ -14,8 +14,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     <section class="contact-layout">
       <div class="image-box">
-    <div class="placeholder-image">
-  <img src="/Logo.png" alt="NSC Tech Hub Logo" />
+        <div class="placeholder-image">
+          <img src="/Logo.png" alt="NSC Tech Hub Logo" />
         </div>
         <div class="info-text">
           <h2>Collaborate With Us</h2>
@@ -26,21 +26,104 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
       </div>
 
-      <form class="contact-form">
+      <form
+        class="contact-form"
+        id="contact-form"
+      >
         <label for="name">Name</label>
-        <input id="name" type="text" placeholder="Enter your name" />
+        <input
+          id="name"
+          name="name"
+          type="text"
+          placeholder="Enter your name"
+          required
+          autocomplete="name"
+        />
 
         <label for="email">Email</label>
-        <input id="email" type="email" placeholder="Enter your email" />
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Enter your email"
+          required
+          autocomplete="email"
+        />
 
         <label for="message">Message</label>
-        <textarea id="message" rows="6" placeholder="Type your message"></textarea>
+        <textarea
+          id="message"
+          name="message"
+          rows="6"
+          placeholder="Type your message"
+          required
+        ></textarea>
 
-        <button type="submit">Send Message</button>
+        <button type="submit" id="submit-btn">Send Message</button>
+
+        <p id="status" class="status"></p>
       </form>
     </section>
   </main>
 </BaseLayout>
+
+<script>
+  const form = document.getElementById("contact-form");
+  const status = document.getElementById("status");
+  const button = document.getElementById("submit-btn");
+
+  const clearStatus = () => {
+    setTimeout(() => {
+      status.textContent = "";
+      status.style.color = "";
+    }, 5000);
+  };
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (button.disabled) return;
+
+    button.disabled = true;
+    status.textContent = "Sending...";
+
+    const payload = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      message: document.getElementById("message").value,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      let data = {};
+      try {
+        data = await res.json();
+      } catch {}
+
+      if (res.ok) {
+        status.textContent = "Message sent successfully!";
+        status.style.color = "#22c55e";
+        form.reset();
+        clearStatus();
+      } else {
+        status.textContent = data.error || "Something went wrong";
+        status.style.color = "#ef4444";
+        clearStatus();
+      }
+    } catch (err) {
+      status.textContent = "Network error";
+      status.style.color = "#ef4444";
+      clearStatus();
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
 
 <style>
   .contact-page {
@@ -94,23 +177,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #94a3b8;
     margin-bottom: 1.5rem;
     background: #111827;
-    .placeholder-image img {
+  }
+
+  .placeholder-image img {
     width: 180px;
     height: auto;
-}
-  }
-
-  .info-text h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .info-text p {
-    color: #cbd5e1;
-    line-height: 1.7;
   }
 
   .contact-form {
@@ -131,7 +204,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     border: 1px solid #334155;
     background: #020617;
     color: white;
-    font-size: 1rem;
   }
 
   .contact-form button {
@@ -144,30 +216,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     cursor: pointer;
   }
 
-  .contact-form button:hover {
-    background: #1d4ed8;
+  .contact-form button:disabled {
+    background: #1e3a8a;
+    color: #64748b;
+  }
+
+  .status {
+    margin-top: 1rem;
+    font-size: 0.9rem;
   }
 
   @media (max-width: 768px) {
     .contact-layout {
       grid-template-columns: 1fr;
-    }
-
-    .hero {
-      text-align: left;
-    }
-
-    .hero h1 {
-      font-size: 2.8rem;
-    }
-
-    .image-box,
-    .contact-form {
-      padding: 1.5rem;
-    }
-
-    .placeholder-image {
-      height: 240px;
     }
   }
 </style>

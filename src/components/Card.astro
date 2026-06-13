@@ -1,0 +1,53 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  class?: string;
+}
+
+const { 
+  title, 
+  description, 
+  imageSrc, 
+  imageAlt = "", 
+  class: className,
+  ...rest 
+} = Astro.props;
+---
+
+<div 
+  class:list={[
+    "flex flex-col bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md hover:-translate-y-1",
+    className
+  ]}
+  {...rest}
+>
+  {imageSrc && (
+    <div class="aspect-video w-full overflow-hidden bg-slate-100 border-b border-slate-100">
+      <img 
+        src={imageSrc} 
+        alt={imageAlt} 
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+    </div>
+  )}
+
+  <div class="flex-1 flex flex-col p-6">
+    <h3 class="text-xl font-bold text-slate-900 tracking-tight mb-2">
+      {title}
+    </h3>
+    
+    <p class="text-slate-600 text-sm leading-relaxed flex-1">
+      {description}
+    </p>
+    
+    {Astro.slots.has('footer') && (
+      <div class="mt-6 pt-4 border-t border-slate-100">
+        <slot name="footer" />
+      </div>
+    )}
+  </div>
+</div>

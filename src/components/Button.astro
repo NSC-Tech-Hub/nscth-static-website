@@ -1,0 +1,44 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  [x: string]: any; // Allows for extra HTML attributes like type="submit"
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  class: className,
+  ...rest
+} = Astro.props;
+
+// 1. Base styles that apply to ALL buttons
+const baseStyles = "inline-flex items-center justify-center font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none";
+
+// 2. Visual Variant styles
+const variants = {
+  primary: "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800",
+  secondary: "bg-slate-100 text-slate-700 hover:bg-slate-200 active:bg-slate-300 border border-slate-300"
+};
+
+// 3. Size styles
+const sizes = {
+  sm: "px-3 py-1.5 text-sm",
+  md: "px-5 py-2.5 text-base",
+  lg: "px-6 py-3 text-lg"
+};
+
+// Determine whether this component should render as an <a> tag or a <button> tag
+const Element = href ? 'a' : 'button';
+---
+
+<Element
+  href={href}
+  class:list={[baseStyles, variants[variant], sizes[size], className]}
+  {...rest}
+>
+  <slot />
+</Element>

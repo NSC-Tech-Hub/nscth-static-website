@@ -2,7 +2,10 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Contact | NSC Tech Hub">
+<BaseLayout
+  title="Contact | NSC Tech Hub"
+  description="Get in touch with NSC Tech Hub at North Seattle College."
+>
   <main class="contact-page">
     <section class="hero">
       <h1>Interested in Working with the Tech Hub?</h1>
@@ -26,10 +29,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
       </div>
 
-      <form
-        class="contact-form"
-        id="contact-form"
-      >
+      <form class="contact-form" id="contact-form">
         <label for="name">Name</label>
         <input
           id="name"
@@ -56,8 +56,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           name="message"
           rows="6"
           placeholder="Type your message"
-          required
-        ></textarea>
+          required></textarea>
 
         <button type="submit" id="submit-btn">Send Message</button>
 
@@ -79,7 +78,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }, 5000);
   };
 
-form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     if (button.disabled) return;

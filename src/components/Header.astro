@@ -1,12 +1,17 @@
 <header class="site-header">
   <div class="header-inner">
-    <a href="/" class="logo">NSC Tech Hub</a>
+    <a href="/" class="logo" aria-label="NSC Tech Hub Home">
+      <img src="/Logo.png" alt="NSC Tech Hub Home" class="logo-img" />
+    </a>
+
     <nav class="nav-links">
       <a href="/">Home</a>
       <a href="/services">Services</a>
       <a href="/team">Team</a>
       <a href="/contact">Contact</a>
-      <a href="https://github.com/NSC-Tech-Hub" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/NSC-Tech-Hub" target="_blank" rel="noopener"
+        >GitHub</a
+      >
     </nav>
   </div>
 </header>
@@ -24,10 +29,13 @@
     justify-content: space-between;
   }
   .logo {
-    color: white;
-    font-weight: 800;
-    font-size: 1.25rem;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  .logo-img {
+    height: 2.5rem;
+    width: auto;
   }
   .nav-links {
     display: flex;

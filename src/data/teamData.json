@@ -35,6 +35,12 @@
         "role": "Software Application Developer",
         "bio": "North Seattle College student in Software Application Development. Focused on full-stack development and building modern web applications. Expected graduation Spring 2027.",
         "image": "/images/team/my.jpg"
+      },
+      {
+        "name": "Bashir Abdulkadir",
+        "role": "Student Developer",
+        "bio": "Bashir Abdulkadir is a student in the BAS Application Development program at North Seattle College. He enjoys learning new technologies, building practical web applications, and working with others on real-world software projects. Through NSC Tech Hub, he is gaining hands-on experience in software development, collaboration, and problem-solving while preparing for a career in the technology industry.",
+        "image": "/images/team/bashir-abdulkadir.jpg"
       }
     ]
   }

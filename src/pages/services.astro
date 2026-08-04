@@ -1,44 +1,70 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import Container from "../components/Container.astro";
+import ServiceRow from "../components/ServiceRow.astro";
 ---
 
 <BaseLayout
   title="Services | NSC Tech Hub"
   description="Explore the services offered by NSC Tech Hub at North Seattle College."
 >
-  <main class="max-w-3xl mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-6">Our Services</h1>
+  <!-- ─── ABOUT ───────────────────────────────────────────────── -->
+  <Section id="about" background="dark">
+    <Container>
+      <div class="max-w-2xl">
+        <p
+          class="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300"
+        >
+          About Us
+        </p>
+        <h1
+          class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl"
+        >
+          What We Do
+        </h1>
+        <p
+          class="mt-5 text-base leading-7 text-slate-400 sm:text-lg sm:leading-8"
+        >
+          The NSC Tech Hub is an interdepartmental digital agency at North
+          Seattle College, connecting Project Management, Development, and
+          Design students to deliver real digital solutions through
+          collaborative, student-led project work.
+        </p>
+      </div>
+    </Container>
+  </Section>
 
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold">Product Management</h2>
-      <p>
-        We define product goals, prioritize features, and guide projects from
-        concept to launch.
-      </p>
-    </section>
+  <!-- ─── SERVICES ────────────────────────────────────────────── -->
+  <Section background="dark" class="border-t border-white/10">
+    <Container>
+      <div class="flex flex-col gap-20 sm:gap-24">
+        <ServiceRow
+          eyebrow="01"
+          title="Project Management"
+          description="We define product goals, prioritize features, and guide projects from concept to launch."
+          reverse
+        />
 
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold">Development</h2>
-      <p>
-        We build scalable and reliable web applications using modern
-        technologies and best practices.
-      </p>
-    </section>
+        <ServiceRow
+          eyebrow="02"
+          title="Development"
+          description="We build scalable and reliable web applications using modern technologies and best practices."
+        />
 
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold">Design Collaboration</h2>
-      <p>
-        We collaborate with designers to create intuitive, accessible, and
-        visually engaging user experiences.
-      </p>
-    </section>
+        <ServiceRow
+          eyebrow="03"
+          title="Design Collaboration"
+          description="We collaborate with designers to create intuitive, accessible, and visually engaging user experiences."
+          reverse
+        />
 
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold">Internal AD Support</h2>
-      <p>
-        We support internal teams by providing tools, systems, and technical
-        guidance to improve workflows.
-      </p>
-    </section>
-  </main>
+        <ServiceRow
+          eyebrow="04"
+          title="Internal AD Support"
+          description="We support internal teams by providing tools, systems, and technical guidance to improve workflows."
+        />
+      </div>
+    </Container>
+  </Section>
 </BaseLayout>

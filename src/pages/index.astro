@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Gallery from "../components/Gallery.astro";
 import ServiceRow from "../components/ServiceRow.astro";
+import { services } from "../data/services";
 ---
 
 <BaseLayout
@@ -166,65 +167,22 @@ import ServiceRow from "../components/ServiceRow.astro";
       <div
         class="mt-8 grid grid-cols-1 gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4"
       >
-        <article
-          class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/5 sm:p-6"
-        >
-          <div
-            class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-2xl"
-          >
-            📋
-          </div>
-          <h3 class="text-lg font-semibold text-white">Project Management</h3>
-          <p class="mt-2 text-sm leading-6 text-slate-400">
-            We define product goals, prioritize features, and guide projects
-            from concept to launch.
-          </p>
-        </article>
-
-        <article
-          class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/5 sm:p-6"
-        >
-          <div
-            class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-2xl"
-          >
-            💻
-          </div>
-          <h3 class="text-lg font-semibold text-white">Development</h3>
-          <p class="mt-2 text-sm leading-6 text-slate-400">
-            We build scalable and reliable web applications using modern
-            technologies and best practices.
-          </p>
-        </article>
-
-        <article
-          class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/5 sm:p-6"
-        >
-          <div
-            class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-2xl"
-          >
-            🎨
-          </div>
-          <h3 class="text-lg font-semibold text-white">Design Collaboration</h3>
-          <p class="mt-2 text-sm leading-6 text-slate-400">
-            We collaborate with designers to create intuitive, accessible, and
-            visually engaging user experiences.
-          </p>
-        </article>
-
-        <article
-          class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/5 sm:p-6"
-        >
-          <div
-            class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-2xl"
-          >
-            🛠️
-          </div>
-          <h3 class="text-lg font-semibold text-white">Internal AD Support</h3>
-          <p class="mt-2 text-sm leading-6 text-slate-400">
-            We support internal teams by providing tools, systems, and technical
-            guidance to improve workflows.
-          </p>
-        </article>
+        {
+          services.map((service) => (
+            <article class="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/5 sm:p-6">
+              <div
+                aria-hidden="true"
+                class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-2xl"
+              >
+                {service.icon}
+              </div>
+              <h3 class="text-lg font-semibold text-white">{service.title}</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-400">
+                {service.description}
+              </p>
+            </article>
+          ))
+        }
       </div>
 
       <div

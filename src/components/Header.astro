@@ -3,10 +3,14 @@
     class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-5 sm:flex-row sm:px-6"
   >
     <a href="/" class="flex items-center" aria-label="NSC Tech Hub Home">
+      <!-- Logo scales up at lg (1024px+) rather than sm (640px) — jumping
+     straight to h-64 at sm made the header unusually tall right at
+     the point the layout switches to flex-row, before there's enough
+     horizontal room for it. Flagged by Copilot review on PR #59. -->
       <img
         src="/Logo.png"
         alt="NSC Tech Hub Home"
-        class="h-16 w-auto sm:h-64"
+        class="h-16 w-auto lg:h-64"
       />
     </a>
 

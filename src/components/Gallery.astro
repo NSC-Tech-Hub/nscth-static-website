@@ -48,6 +48,8 @@ const galleryItems = [
           <img
             src={item.image}
             alt={item.alt}
+            loading="lazy"
+            decoding="async"
             class="h-40 w-full rounded-lg object-cover"
           />
           <h3 class="mt-4 text-lg font-semibold text-white">{item.title}</h3>

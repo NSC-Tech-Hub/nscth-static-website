@@ -3,7 +3,7 @@
     "section": "TPM",
     "members": [
       {
-        "name": "Team Member Name",
+        "name": "Oliver Warlick",
         "role": "Position",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
         "image": null
@@ -31,10 +31,16 @@
     "section": "Developers",
     "members": [
       {
-        "name": "Team Member Name",
-        "role": "Position",
-        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-        "image": null
+        "name": "Mark Yosinao",
+        "role": "Software Application Developer",
+        "bio": "North Seattle College student in Software Application Development. Focused on full-stack development and building modern web applications. Expected graduation Spring 2027.",
+        "image": "/images/team/my.jpg"
+      },
+      {
+        "name": "Bashir Abdulkadir",
+        "role": "Student Developer",
+        "bio": "Bashir Abdulkadir is a student in the BAS Application Development program at North Seattle College. He enjoys learning new technologies, building practical web applications, and working with others on real-world software projects. Through NSC Tech Hub, he is gaining hands-on experience in software development, collaboration, and problem-solving while preparing for a career in the technology industry.",
+        "image": "/images/team/bashir-abdulkadir.jpg"
       }
     ]
   }

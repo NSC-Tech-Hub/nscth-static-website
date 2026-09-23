@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
 import Container from "../components/Container.astro";
 import ServiceRow from "../components/ServiceRow.astro";
+import { services } from "../data/services";
 ---
 
 <BaseLayout
@@ -39,31 +40,16 @@ import ServiceRow from "../components/ServiceRow.astro";
   <Section background="dark" class="border-t border-white/10">
     <Container>
       <div class="flex flex-col gap-20 sm:gap-24">
-        <ServiceRow
-          eyebrow="01"
-          title="Project Management"
-          description="We define product goals, prioritize features, and guide projects from concept to launch."
-          reverse
-        />
-
-        <ServiceRow
-          eyebrow="02"
-          title="Development"
-          description="We build scalable and reliable web applications using modern technologies and best practices."
-        />
-
-        <ServiceRow
-          eyebrow="03"
-          title="Design Collaboration"
-          description="We collaborate with designers to create intuitive, accessible, and visually engaging user experiences."
-          reverse
-        />
-
-        <ServiceRow
-          eyebrow="04"
-          title="Internal AD Support"
-          description="We support internal teams by providing tools, systems, and technical guidance to improve workflows."
-        />
+        {
+          services.map((service, index) => (
+            <ServiceRow
+              eyebrow={service.eyebrow}
+              title={service.title}
+              description={service.description}
+              reverse={index % 2 === 0}
+            />
+          ))
+        }
       </div>
     </Container>
   </Section>

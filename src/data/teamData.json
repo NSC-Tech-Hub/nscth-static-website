@@ -4,26 +4,9 @@
     "members": [
       {
         "name": "Oliver Warlick",
-        "role": "Position",
-        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-        "image": null
-      }
-    ]
-  },
-  {
-    "section": "Product Management",
-    "members": [
-      {
-        "name": "Team Member Name",
-        "role": "Position",
-        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-        "image": null
-      },
-      {
-        "name": "Team Member Name",
-        "role": "Position",
-        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-        "image": null
+        "role": "Technical Product Manager",
+        "bio": "Senior at North Seattle College pursuing a Bachelor's degree in Software Application Development (Class of 2027). Pursuing work as a Technical Program Manager or Software Engineer.",
+        "image": "/images/team/oliver-warlick.jpg"
       }
     ]
   },

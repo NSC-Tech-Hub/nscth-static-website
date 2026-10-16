@@ -30,7 +30,13 @@
         "role": "Student Developer",
         "bio": "North Seattle College student currently enrolled in the Application Development program. Expected to graduate in Spring 2027.",
         "image": "/images/team/amdew.jpg"
-}
+      },
+      {
+        "name": "Yisakor Mirany",
+        "role": "Student Developer",
+        "bio": "Yisakor Mirany is a student in the BAS Application Development program at North Seattle College with a passion for software engineering, web development, and emerging technologies. He has gained hands-on experience through his internship with CodeDay Labs, contributing to open-source projects and collaborating with developers to improve real-world applications. He enjoys building creative solutions, exploring new technologies, and strengthening his programming and problem-solving skills. Through NSC Tech Hub, he aims to expand his technical expertise, collaborate with other developers, and prepare for a successful career in software engineering.",
+        "image": "/images/team/yisakor-mirany.jpg"
+      }
     ]
   }
 ]

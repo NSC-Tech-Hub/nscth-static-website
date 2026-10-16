@@ -7,7 +7,9 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nsctechhub.com',
-  integrations: [sitemap()],
+  integrations: [sitemap({
+    filter: (page) => !page.includes('/test/'),
+  })],
   vite: {
     plugins: [tailwindcss()]
   }

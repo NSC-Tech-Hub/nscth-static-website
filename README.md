@@ -1,6 +1,6 @@
 ## Live Site
 
-🚀 View the deployed site: https://nscth-static-website.pages.dev
+🚀 View the deployed site: https://nsctechhub.com
 
 # Base Structure Setup
 

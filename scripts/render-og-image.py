@@ -4,6 +4,9 @@
 Reproducible generator for public/og-image.png. Matches the site's brand:
 dark slate-950 background, blue-400 accent, the NSC Tech Hub wordmark logo,
 headline, and tagline. Run from the repo root:  python3 scripts/render-og-image.py
+
+Portable: no machine-specific paths. Fonts resolve via ./fonts -> ~/.fonts ->
+system font dirs. Output is written relative to this script.
 """
 import os
 from PIL import Image, ImageDraw, ImageFont
@@ -19,8 +22,18 @@ ACCENT = (96, 165, 250)    # blue-400
 TEXT = (255, 255, 255)
 MUTED = (148, 163, 184)    # slate-400
 
-FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-FONT_REG = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+
+def _font_path(name):
+    """Resolve a font file portably: ./fonts -> ~/.fonts -> system dirs."""
+    candidates = [
+        os.path.join(os.path.dirname(__file__), "..", "fonts", name),
+        os.path.join(os.path.expanduser("~"), ".fonts", name),
+        os.path.join("/usr/share/fonts/truetype/dejavu", name),
+    ]
+    for c in candidates:
+        if os.path.isfile(c):
+            return c
+    return candidates[-1]
 
 
 def lerp(a, b, t):
@@ -60,7 +73,7 @@ def main():
     base.paste(logo, (logo_x, logo_y), logo)
 
     # Headline (two lines, second line accented)
-    title_font = ImageFont.truetype(FONT_BOLD, 58)
+    title_font = ImageFont.truetype(_font_path("DejaVuSans-Bold.ttf"), 58)
     line1 = "The Technical Engine for"
     line2 = "Bridge to Tech"
     l1w = d.textlength(line1, font=title_font)
@@ -69,14 +82,14 @@ def main():
     d.text(((W - l2w) / 2, 372), line2, font=title_font, fill=ACCENT)
 
     # Tagline
-    tag_font = ImageFont.truetype(FONT_REG, 30)
+    tag_font = ImageFont.truetype(_font_path("DejaVuSans.ttf"), 30)
     tag = "Student-led digital solutions at North Seattle College"
     tw = d.textlength(tag, font=tag_font)
     d.text(((W - tw) / 2, 470), tag, font=tag_font, fill=MUTED)
 
     # URL pill
-    url_font = ImageFont.truetype(FONT_REG, 26)
-    url = "nscth-static-website.pages.dev"
+    url_font = ImageFont.truetype(_font_path("DejaVuSans.ttf"), 26)
+    url = "nsctechhub.com"
     uw = d.textlength(url, font=url_font)
     pad_x, pad_y = 28, 14
     pill_w = uw + pad_x * 2

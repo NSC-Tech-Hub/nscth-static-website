@@ -62,7 +62,7 @@
 > Week 3 · May 25–31
 
 - [x] 2.2.1 Create `src/pages/index.astro` — Home page
-- [ ] 2.2.2 Create `src/pages/about.astro` — About page
+- [x] 2.2.2 ~~Create `src/pages/about.astro`~~ — merged into `/services` as "About Us"
 - [ ] 2.2.3 Create `src/pages/services.astro` — Services page
 - [ ] 2.2.4 Create `src/pages/team.astro` — Team page
 - [ ] 2.2.5 Create `src/pages/contact.astro` — Contact page
@@ -99,7 +99,7 @@
 ### 3.2 Page Content
 > Week 4–5 · June 1–14
 
-- [ ] 3.2.1 **Home page** — hero section, agency intro, three-pillar callout (Creative · Business · Technical), CTA
+- [x] 3.2.2 ~~**About page**~~ — now lives in `/services` as "About Us"
 - [ ] 3.2.2 **About page** — agency mission, interdisciplinary model, department breakdown
 - [ ] 3.2.3 **Services page** — three-pillar section using `ServiceCard.astro`, CTA linking to Contact
 - [ ] 3.2.4 **Team page** — department-grouped grid using `TeamCard.astro`, faculty and leadership row

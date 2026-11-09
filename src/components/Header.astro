@@ -1,6 +1,10 @@
+---
+import Container from "./Container.astro";
+---
+
 <header class="border-b border-white/10 bg-slate-950">
-  <div
-    class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-5 sm:flex-row sm:px-6"
+  <Container
+    class="flex flex-col items-center justify-between gap-4 py-5 sm:flex-row"
   >
     <a href="/" class="flex items-center" aria-label="NSC Tech Hub Home">
       <!-- Logo scales up at lg (1024px+) rather than sm (640px) — jumping
@@ -39,5 +43,5 @@
         class="font-medium text-slate-300 transition hover:text-white">GitHub</a
       >
     </nav>
-  </div>
+  </Container>
 </header>

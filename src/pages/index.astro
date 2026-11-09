@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
 import Gallery from "../components/Gallery.astro";
 import ServiceRow from "../components/ServiceRow.astro";
 import { services } from "../data/services";
@@ -28,8 +29,8 @@ import { services } from "../data/services";
     >
     </div>
 
-    <div
-      class="relative mx-auto max-w-6xl px-4 pt-10 pb-4 sm:px-6 sm:pt-12 sm:pb-6"
+    <Container
+      class="relative pt-10 pb-4 sm:pt-12 sm:pb-6"
     >
       <div class="ml-auto w-full max-w-xl text-left sm:max-w-2xl">
         <h1
@@ -56,16 +57,16 @@ import { services } from "../data/services";
           </a>
         </div>
       </div>
-    </div>
+    </Container>
   </section>
   <!-- /HERO -->
 
   <!-- ─── MISSION ─────────────────────────────────────────────── -->
   <section
     id="mission"
-    class="border-t border-white/10 bg-slate-900/60 px-4 py-16 sm:px-6 sm:py-20"
+    class="border-t border-white/10 bg-slate-900/60 py-16 sm:py-20"
   >
-    <div class="mx-auto max-w-6xl">
+    <Container>
       <ServiceRow
         eyebrow="Mission Statement"
         title="A system-dependent agency built to last."
@@ -74,7 +75,7 @@ import { services } from "../data/services";
         imageAlt="Tree diagram showing NSC Tech Hub's organizational structure: Roots (Governance and Documentation), Trunk (Technical Program Manager), and Canopy (Faculty Owners, Department Liaisons, and Production Teams)"
         reverse
       />
-    </div>
+    </Container>
   </section>
 
   <!-- ─── SERVICES PREVIEW ───────────────────────────────────────
@@ -82,9 +83,9 @@ import { services } from "../data/services";
        8/3) rather than maintaining a separate homepage taxonomy. -->
   <section
     id="services"
-    class="border-t border-white/10 px-4 py-16 sm:px-6 sm:py-20"
+    class="border-t border-white/10 py-16 sm:py-20"
   >
-    <div class="mx-auto max-w-6xl">
+    <Container>
       <div class="mx-auto max-w-2xl text-center">
         <p
           class="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300"
@@ -126,15 +127,15 @@ import { services } from "../data/services";
           ))
         }
       </div>
-    </div>
+    </Container>
   </section>
 
   <!-- ─── JOIN / CTA ───────────────────────────────────────────── -->
   <section
     id="join"
-    class="border-t border-white/10 bg-slate-900/60 px-4 py-16 sm:px-6 sm:py-20"
+    class="border-t border-white/10 bg-slate-900/60 py-16 sm:py-20"
   >
-    <div class="mx-auto max-w-6xl text-center">
+    <Container class="text-center">
       <p
         class="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300"
       >
@@ -196,7 +197,7 @@ import { services } from "../data/services";
           </p>
         </div>
       </div>
-    </div>
+    </Container>
   </section>
 
   <!-- Reusable Gallery Component -->

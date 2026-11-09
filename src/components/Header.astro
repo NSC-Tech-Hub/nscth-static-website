@@ -1,8 +1,31 @@
-<header class="border-b border-white/10 bg-slate-950">
+---
+import { isCurrentPage, navLinks } from "../data/nav";
+
+const pathname = Astro.url.pathname;
+
+// Below sm (40rem), the nav is hidden in CSS before JavaScript runs.
+// The <noscript> rule shows the links when JavaScript is disabled.
+---
+
+<noscript>
+  <style is:inline>
+    @media (width < 40rem) {
+      #menu-toggle {
+        display: none !important;
+      }
+
+      #site-nav {
+        display: flex !important;
+      }
+    }
+  </style>
+</noscript>
+
+<header id="site-header" class="border-b border-white/10 bg-slate-950">
   <div
-    class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-5 sm:flex-row sm:px-6"
+    class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-5 sm:flex-nowrap sm:px-6"
   >
-    <a href="/" class="flex items-center" aria-label="NSC Tech Hub Home">
+    <a href="/" class="logo-link flex items-center" aria-label="NSC Tech Hub Home">
       <!-- Logo scales up at lg (1024px+) rather than sm (640px) — jumping
      straight to h-64 at sm made the header unusually tall right at
      the point the layout switches to flex-row, before there's enough
@@ -16,28 +39,127 @@
       />
     </a>
 
-    <nav class="flex flex-wrap items-center justify-center gap-6">
-      <a
-        href="/team"
-        class="font-medium text-slate-300 transition hover:text-white"
-        >Our Team</a
+    <button
+      id="menu-toggle"
+      type="button"
+      class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-slate-300 transition hover:text-white sm:hidden"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      aria-label="Open menu"
+    >
+      <svg
+        class="icon-open size-6"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        aria-hidden="true"
       >
-      <a
-        href="/services"
-        class="font-medium text-slate-300 transition hover:text-white"
-        >Services</a
+        <path d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+      <svg
+        class="icon-close size-6"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        aria-hidden="true"
       >
-      <a
-        href="/contact"
-        class="font-medium text-slate-300 transition hover:text-white"
-        >Contact Us</a
-      >
-      <a
-        href="https://github.com/NSC-Tech-Hub"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="font-medium text-slate-300 transition hover:text-white">GitHub</a
-      >
+        <path d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </button>
+
+    <nav
+      id="site-nav"
+      class="flex w-full flex-col gap-1 max-sm:hidden sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-end sm:gap-6"
+      aria-label="Primary"
+    >
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="nav-link rounded-md px-1 py-2 font-medium text-slate-300 transition hover:text-white sm:px-0 sm:py-0"
+            aria-current={isCurrentPage(pathname, link.href) ? "page" : undefined}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
   </div>
 </header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("#menu-toggle");
+  const nav = document.querySelector<HTMLElement>("#site-nav");
+
+  if (toggle && nav) {
+    const desktopQuery = window.matchMedia("(min-width: 40rem)");
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      nav.classList.toggle("is-open", open);
+    };
+
+    toggle.addEventListener("click", () => {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (toggle.getAttribute("aria-expanded") !== "true") return;
+      setOpen(false);
+      toggle.focus();
+    });
+
+    // The desktop row is always visible. Drop the mobile open state
+    // if the viewport crosses the sm breakpoint.
+    desktopQuery.addEventListener("change", (event) => {
+      if (event.matches) setOpen(false);
+    });
+  }
+</script>
+
+<style>
+  #menu-toggle .icon-close {
+    display: none;
+  }
+
+  #menu-toggle[aria-expanded="true"] .icon-open {
+    display: none;
+  }
+
+  #menu-toggle[aria-expanded="true"] .icon-close {
+    display: block;
+  }
+
+  /* Wins over Tailwind's max-sm:hidden (a single class) on small screens. */
+  @media (width < 40rem) {
+    #site-nav.is-open {
+      display: flex;
+    }
+  }
+
+  #menu-toggle:focus-visible,
+  #site-header .logo-link:focus-visible,
+  #site-nav .nav-link:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+  }
+
+  /* Underline and weight carry the active state; color is secondary. */
+  #site-nav .nav-link[aria-current="page"] {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35em;
+  }
+</style>

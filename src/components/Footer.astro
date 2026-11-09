@@ -1,4 +1,6 @@
 ---
+import { navLinks } from "../data/nav";
+
 const year = new Date().getFullYear();
 ---
 <footer class="border-t border-white/10 bg-slate-950 pb-8">
@@ -10,18 +12,22 @@ const year = new Date().getFullYear();
         © {year} NSC Tech Hub. Built by Students at North Seattle College.
       </p>
 
-      <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 md:justify-end">
-        <a href="/team" class="transition hover:text-white">Our Team</a>
-        <a href="/services" class="transition hover:text-white">Services</a>
-        <a href="/contact" class="transition hover:text-white">Contact Us</a>
-        <a
-          href="https://github.com/NSC-Tech-Hub"
-          class="transition hover:text-white"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub
-        </a>
+      <nav
+        class="flex flex-wrap justify-center gap-x-6 gap-y-2 md:justify-end"
+        aria-label="Footer"
+      >
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="transition hover:text-white"
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
+            >
+              {link.label}
+            </a>
+          ))
+        }
       </nav>
     </div>
   </div>

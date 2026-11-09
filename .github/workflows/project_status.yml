@@ -10,6 +10,10 @@ on:
 
 jobs:
   sync-status:
+    # Fork PRs get no secrets/vars on pull_request_review events, so skip them.
+    if: >-
+      github.event_name != 'pull_request_review' ||
+      github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
 
     steps:
@@ -47,7 +51,7 @@ jobs:
                 reopened) desired="In Progress" ;;
               esac
               ;;
-            pull_request)
+            pull_request|pull_request_target)
               case "$ACTION" in
                 opened)
                   if [ "$IS_DRAFT" = "true" ]; then

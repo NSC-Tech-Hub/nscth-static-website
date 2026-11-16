@@ -96,3 +96,30 @@ npm run dev
 
 You can also test the production build with:
 npm run build
+
+### Contact form protection (issue #65)
+
+Before deploying, create a Cloudflare Turnstile widget with the production and preview
+hostnames allowed. Configure these Cloudflare Pages variables for each environment:
+
+- `PUBLIC_TURNSTILE_SITE_KEY`: public widget key, available during the Astro build.
+- `TURNSTILE_SECRET_KEY`: matching secret, available to Pages Functions at runtime.
+- `SLACK_WEBHOOK_URL`: existing secret Slack incoming webhook URL.
+
+Rebuild after changing the public key. Missing configuration disables submission or
+returns an error; verification is never bypassed. The widget uses the `contact`
+action, which the function checks after server-side Siteverify validation.
+
+For local integration testing, build with the public key and serve `dist` using
+Cloudflare Pages tooling with both runtime secrets configured. `astro dev` alone
+does not serve the Pages Function. Use Cloudflare's documented Turnstile testing
+keys for local tests only, never production. Do not commit secrets.
+
+Run `npm test` for mocked endpoint regression tests and `npm run build` for the
+production build. Before release, verify a real challenge sends one message to the
+test Slack channel and a failed challenge sends none. Name, email, and message
+limits are 100, 254, and 2000 characters; filled honeypots silently succeed without
+contacting Turnstile or Slack.
+
+References: [Turnstile server validation](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/)
+and [Slack text escaping](https://docs.slack.dev/messaging/formatting-message-text/).

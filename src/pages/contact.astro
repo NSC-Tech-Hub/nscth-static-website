@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
 <BaseLayout
@@ -37,6 +38,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           type="text"
           placeholder="Enter your name"
           required
+          maxlength="100"
           autocomplete="name"
         />
 
@@ -47,6 +49,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           type="email"
           placeholder="Enter your email"
           required
+          maxlength="254"
           autocomplete="email"
         />
 
@@ -54,16 +57,29 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <textarea
           id="message"
           name="message"
+          maxlength="2000"
           rows="6"
           placeholder="Type your message"
           required></textarea>
 
-        <button type="submit" id="submit-btn">Send Message</button>
+        <div class="honeypot" aria-hidden="true" inert>
+          <label for="website">Website</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
 
-        <p id="status" class="status"></p>
+        {turnstileSiteKey ? (
+          <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-action="contact"></div>
+        ) : (
+          <p>Contact verification is unavailable. Please try again later.</p>
+        )}
+
+        <button disabled={!turnstileSiteKey} type="submit" id="submit-btn">Send Message</button>
+
+        <p id="status" class="status" role="status" aria-live="polite"></p>
       </form>
     </section>
   </main>
+  {turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
 </BaseLayout>
 
 <script>
@@ -83,10 +99,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     if (button.disabled) return;
 
+    const fields = new FormData(form);
+    const token = fields.get("cf-turnstile-response");
+    if (!token) {
+      status.textContent = "Please complete the verification before sending.";
+      return;
+    }
+
     button.disabled = true;
     status.textContent = "Sending...";
 
     const payload = {
+      website: fields.get("website"),
+      turnstileToken: token,
       name: document.getElementById("name").value,
       email: document.getElementById("email").value,
       message: document.getElementById("message").value,
@@ -119,12 +144,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       status.style.color = "#ef4444";
       clearStatus();
     } finally {
+      // Tokens are single-use, including after downstream failures.
+      (window as Window & { turnstile?: { reset: () => void } }).turnstile?.reset();
       button.disabled = false;
     }
   });
 </script>
 
 <style>
+  .honeypot {
+    display: none;
+  }
+
   .contact-page {
     min-height: 100vh;
     background: #050816;

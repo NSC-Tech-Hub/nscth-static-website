@@ -7,7 +7,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
   title="Contact | NSC Tech Hub"
   description="Get in touch with NSC Tech Hub at North Seattle College."
 >
-  <main class="contact-page">
+  <div class="contact-page">
     <section class="hero">
       <h1>Interested in Working with the Tech Hub?</h1>
       <p>
@@ -17,18 +17,22 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     </section>
 
     <section class="contact-layout">
-      <div class="image-box">
-        <div class="placeholder-image">
-          <img src="/Logo.webp" alt="NSC Tech Hub Logo" width="768" height="512" />
-        </div>
-        <div class="info-text">
-          <h2>Collaborate With Us</h2>
-          <p>
-            NSC Tech Hub connects students, technology, and creative projects
-            together through collaboration and innovation.
-          </p>
-        </div>
-      </div>
+      <aside class="contact-info self-start space-y-4 leading-relaxed text-slate-300">
+        <h2 class="text-2xl font-bold text-white">Get Involved</h2>
+        <p>
+          Tell us what you’d like to work on or how we can help. The Tech Hub
+          team will review your message and use the email address you provide
+          to follow up.
+        </p>
+        <p>
+          If you can’t use the form, email
+          <a class="break-all text-blue-300 underline" href="mailto:nsc.ad.bas@gmail.com">nsc.ad.bas@gmail.com</a>.
+        </p>
+        <p>
+          To explore our projects and find ways to contribute, visit the
+          <a class="text-blue-300 underline" href="https://github.com/NSC-Tech-Hub">NSC Tech Hub on GitHub</a>.
+        </p>
+      </aside>
 
       <form class="contact-form" id="contact-form">
         <label for="name">Name</label>
@@ -75,10 +79,10 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
         <button disabled={!turnstileSiteKey} type="submit" id="submit-btn">Send Message</button>
 
-        <p id="status" class="status" role="status" aria-live="polite"></p>
+        <p id="status" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
       </form>
     </section>
-  </main>
+  </div>
   {turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
 </BaseLayout>
 
@@ -87,68 +91,65 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
   const status = document.getElementById("status");
   const button = document.getElementById("submit-btn");
 
-  const clearStatus = () => {
-    setTimeout(() => {
-      status.textContent = "";
-      status.style.color = "";
-    }, 5000);
-  };
+  if (form instanceof HTMLFormElement && status && button instanceof HTMLButtonElement) {
+    const idleLabel = button.textContent;
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    if (button.disabled) return;
-
-    const fields = new FormData(form);
-    const token = fields.get("cf-turnstile-response");
-    if (!token) {
-      status.textContent = "Please complete the verification before sending.";
-      return;
+    function showStatus(region: HTMLElement, message: string, state?: "success" | "error") {
+      region.classList.toggle("text-green-400", state === "success");
+      region.classList.toggle("text-red-400", state === "error");
+      region.textContent = message;
     }
 
-    button.disabled = true;
-    status.textContent = "Sending...";
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (button.disabled) return;
 
-    const payload = {
-      website: fields.get("website"),
-      turnstileToken: token,
-      name: document.getElementById("name").value,
-      email: document.getElementById("email").value,
-      message: document.getElementById("message").value,
-    };
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      let data = {};
-      try {
-        data = await res.json();
-      } catch {}
-
-      if (res.ok) {
-        status.textContent = "Message sent successfully!";
-        status.style.color = "#22c55e";
-        form.reset();
-        clearStatus();
-      } else {
-        status.textContent = data.error || "Something went wrong";
-        status.style.color = "#ef4444";
-        clearStatus();
+      const fields = new FormData(form);
+      const token = fields.get("cf-turnstile-response");
+      if (!token) {
+        showStatus(status, "Please complete the verification before sending.", "error");
+        return;
       }
-    } catch (err) {
-      status.textContent = "Network error";
-      status.style.color = "#ef4444";
-      clearStatus();
-    } finally {
-      // Tokens are single-use, including after downstream failures.
-      (window as Window & { turnstile?: { reset: () => void } }).turnstile?.reset();
-      button.disabled = false;
-    }
-  });
+
+      const payload = {
+        website: fields.get("website"),
+        turnstileToken: token,
+        name: fields.get("name"),
+        email: fields.get("email"),
+        message: fields.get("message"),
+      };
+
+      button.disabled = true;
+      button.textContent = "Sending...";
+      showStatus(status, "Sending...");
+
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        if (response.ok) {
+          form.reset();
+          showStatus(status, "Message sent successfully!", "success");
+        } else {
+          const data = await response.json().catch(() => null);
+          const message = typeof data?.error === "string" && data.error
+            ? data.error
+            : "Something went wrong. Please try again.";
+          showStatus(status, message, "error");
+        }
+      } catch {
+        showStatus(status, "Network error. Please try again.", "error");
+      } finally {
+        button.textContent = idleLabel;
+        button.disabled = false;
+        // Tokens are single-use, including after downstream failures.
+        (window as Window & { turnstile?: { reset: () => void } }).turnstile?.reset();
+      }
+    });
+  }
 </script>
 
 <style>
@@ -192,28 +193,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     gap: 2rem;
   }
 
-  .image-box,
+  .contact-info,
   .contact-form {
     background: #0f172a;
     border-radius: 20px;
     padding: 2rem;
     border: 1px solid #1e293b;
-  }
-
-  .placeholder-image {
-    height: 320px;
-    border: 2px dashed #475569;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    background: #111827;
-  }
-
-  .placeholder-image img {
-    width: 180px;
-    height: auto;
   }
 
   .contact-form {
@@ -248,7 +233,8 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
   .contact-form button:disabled {
     background: #1e3a8a;
-    color: #64748b;
+    color: #e2e8f0;
+    cursor: not-allowed;
   }
 
   .status {
